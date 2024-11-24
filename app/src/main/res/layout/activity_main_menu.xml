@@ -5,22 +5,22 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="16dp"
-    android:background="@drawable/background"
+    android:background="@drawable/blue"
     android:gravity="center">
 
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="243dp"
-        android:layout_height="434dp"
+        android:layout_height="371dp"
         app:srcCompat="@drawable/logo" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Electric Bill App"
-        android:textSize="24sp"
+        android:textSize="40sp"
         android:textStyle="bold"
-        android:textColor="#F6ACE6"
+        android:textColor="#040303"
         android:layout_marginBottom="32dp"/>
 
     <Button
@@ -28,6 +28,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Save New Bill"
+        android:backgroundTint="#FB7019"
+        android:textStyle="bold"
+        android:textColor="@color/black"
         android:layout_marginBottom="16dp"/>
 
     <Button
@@ -35,6 +38,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="View All Bills"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        android:backgroundTint="#FB7019"
         android:layout_marginBottom="16dp"/>
 
     <Button
@@ -42,6 +48,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="View Specific Bill"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        android:backgroundTint="#FB7019"
         android:layout_marginBottom="16dp"/>
 
 </LinearLayout>

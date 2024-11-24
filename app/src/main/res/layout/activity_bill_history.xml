@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="16dp"
-    android:background="@drawable/background">
+    android:background="@drawable/blue">
 
     <TextView
         android:layout_width="match_parent"
@@ -14,7 +14,7 @@
         android:text="BILL HISTORY"
         android:textSize="30dp"
         android:textStyle="bold"
-        android:textColor="#FB7019"
+        android:textColor="#020201"
         android:gravity="center"
         />
 
@@ -23,6 +23,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Search by ID or Name"
+        android:textColor="@color/black"
         android:padding="8dp"
         android:background="@android:drawable/editbox_background"
         android:layout_marginBottom="8dp"/>
@@ -31,10 +32,11 @@
         android:id="@+id/tvInstructions"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="16dp"
+        android:layout_margin="5dp"
         android:textAlignment="center"
         android:visibility="gone"
-        android:textColor="@android:color/darker_gray"/>
+        android:textStyle="bold"
+        android:textColor="@color/black"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvBillHistory"

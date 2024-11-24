@@ -46,7 +46,7 @@ public class BillHistoryActivity extends AppCompatActivity {
             etSearchBill.setHint("Enter Bill ID or Customer name");
             TextView tvInstructions = findViewById(R.id.tvInstructions);
             tvInstructions.setVisibility(View.VISIBLE);
-            tvInstructions.setText("Search by:\n• Bill ID (e.g., 1234)\n• Customer name (e.g., John)");
+            tvInstructions.setText("Search by: Bill ID/Customer name");
             adapter = new BillAdapter(new ArrayList<>());
             rvBillHistory.setAdapter(adapter);
         } else {
@@ -64,15 +64,12 @@ public class BillHistoryActivity extends AppCompatActivity {
                 String query = s.toString().trim();
                 if (!query.isEmpty()) {
                     try {
-
                         int billId = Integer.parseInt(query);
-                        fetchSpecificBill(query, true);
+                        fetchSpecificBill(String.valueOf(billId), true);
                     } catch (NumberFormatException e) {
-
                         fetchSpecificBill(query, false);
                     }
                 } else {
-
                     adapter.updateList(new ArrayList<>());
                 }
             }
@@ -116,7 +113,6 @@ public class BillHistoryActivity extends AppCompatActivity {
     }
 
     private void fetchSpecificBill(String searchQuery, boolean isId) {
-        // Build URL with appropriate parameter and encode the username for URLs
         String url = GET_BILLS_URL + "?" + 
                     (isId ? "id=" : "username=") + 
                     Uri.encode(searchQuery);
@@ -131,10 +127,14 @@ public class BillHistoryActivity extends AppCompatActivity {
                             JSONObject billObject = bills.getJSONObject(i);
                             Bill bill = new Bill();
                             bill.id = billObject.getInt("id");
+                            
+                            if (isId && bill.id != Integer.parseInt(searchQuery)) {
+                                continue;
+                            }
+                            
                             bill.userName = billObject.getString("user_name");
                             
-                            // For username search, only add exact matches (case-insensitive)
-                            if (!isId && !bill.userName.equalsIgnoreCase(searchQuery)) {
+                            if (!isId && !bill.userName.equals(searchQuery)) {
                                 continue;
                             }
                             
@@ -156,12 +156,14 @@ public class BillHistoryActivity extends AppCompatActivity {
                         adapter.updateList(billList);
                     } catch (JSONException e) {
                         e.printStackTrace();
+                        adapter.updateList(new ArrayList<>());
                         Toast.makeText(BillHistoryActivity.this, 
-                            "Error parsing JSON response", 
+                            "ID did not match",
                             Toast.LENGTH_SHORT).show();
                     }
                 },
                 error -> {
+                    adapter.updateList(new ArrayList<>());
                     Toast.makeText(BillHistoryActivity.this, 
                         "Error fetching bills: " + error.getMessage(), 
                         Toast.LENGTH_SHORT).show();
